@@ -1,1 +1,1 @@
-# syncmama
+# graphql-schema-modularize
