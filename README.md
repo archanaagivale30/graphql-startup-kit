@@ -1,1 +1,1 @@
-# graphql-schema-modularize
+# graphql-startup -kit
