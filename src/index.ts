@@ -1,5 +1,5 @@
 const express = require('express')
-const graphqlHTTP = require('express-graphql');
+const {graphqlHTTP} = require('express-graphql');
 import Schema from './schema/Schema';
 import expressPlayground from 'graphql-playground-middleware-express';
 const getErrorCode = require('./config/errors')
@@ -13,10 +13,7 @@ app.use('/graphql', (req, res) => {
     schema: new Schema().schema,
     graphiql: true,
     rootValue: new Schema().root,
-    customFormatErrorFn: (err) => {
-      const error = getErrorCode(err.message)
-      return ({ message: error.message, statusCode: error.statusCode })
-    }
+   
    
   })(req, res)
 })

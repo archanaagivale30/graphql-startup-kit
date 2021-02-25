@@ -15,13 +15,29 @@ class EmployeeController {
           throw err;
         });
     }
-    public create({id,input}): any {
-        return EmployeeModel.update({_id:id},input)
+    public create({input}): any {
+      return new Promise(function (resolve, reject) {
+        let image = input.image || {};
+        delete input.image;
+        input.image = image.file ? true : false;
+        EmployeeModel.create(input, (err, employee) => {
+          console.log(employee)
+          console.log(err)
+
+          return employee;
+        })
+      })
+    }
+    public update({ id, input }, req): IEmployeeModel | Object {
+     
+      return EmployeeModel.findOneAndUpdate({ _id: id }, {"$set":input})
         .then((update) => {
-         return  { count: update.nModified|| 0 }
+          return EmployeeModel.findById(id).then(dept => dept)
         })
         .catch((error: Error) => {
-            return {};
+          var err = new Error("NOTFOUND");
+          err.stack = error.message;
+          throw err;
         });
     }
 }

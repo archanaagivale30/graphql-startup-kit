@@ -12,7 +12,8 @@ type Employee {
     }`;
 export const inputs = `
 input EmployeeInput {
-    title : String
+    title : String,
+    email:String
   }
 `;
 export const queries = `   
@@ -21,9 +22,12 @@ Employees: [Employee]
 
 export const mutations = `
 createEmployee(input: EmployeeInput): Employee
+updateEmployee(id: ID!, input: EmployeeInput): Employee
+
 `;
 
 export const roots = {
     Employees: EmployeeController.getAllEmployees,
     createEmployee: EmployeeController.create,
+    updateEmployee:EmployeeController.update
 }
